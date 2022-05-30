@@ -23,6 +23,7 @@ contract NFTGame {
     /// @dev Data passed in to the contract when it is first created initializing the characters
     constructor(
         string[] memory characterNames,
+        string[] memory characterDescription,
         string[] memory characterImageURIs,
         uint256[] memory characterHp,
         uint256[] memory characterAttackDmg
@@ -32,6 +33,7 @@ contract NFTGame {
                 CharacterAttributes({
                     characterIndex: i,
                     name: characterNames[i],
+                    description: characterDescription[i],
                     imageURI: characterImageURIs[i],
                     hp: characterHp[i],
                     maxHp: characterHp[i],
@@ -43,6 +45,7 @@ contract NFTGame {
             console.log(
                 "Done initializing %s w/ HP %s, img %s ",
                 c.name,
+                c.description,
                 c.hp,
                 c.imageURI
             );
