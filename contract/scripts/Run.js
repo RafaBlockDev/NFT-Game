@@ -2,9 +2,6 @@ const main = async () => {
     const gameContractFactory = await hre.ethers.getContractFactory("NFTGame");
     const gameContract = await gameContractFactory.deploy(
         ["Rafa", "Joshua", "Val"], // Names
-        ["Rafa is a person who have knives and know kung-Fu",
-         "Joshua is a person who know use weapons and have militar trainment",
-         "Val is a spy from URSS who read minds"]
         ["https://i.imgur.com/pKd5Sdk.png", // Images
         "https://i.imgur.com/xVu4vFL.png", 
         "https://i.imgur.com/WMB6g9u.png"],
