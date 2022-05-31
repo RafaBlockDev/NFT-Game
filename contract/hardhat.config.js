@@ -11,16 +11,16 @@ module.exports = {
     mumbai: {
       url: process.env.ALCHEMY_MUMBAI_URL,
       accounts:
-        process.env.PRIVATE_KEY_MUMBAI,
+        [process.env.PRIVATE_KEY_MUMBAI]
     },
   },
   gasReporter: {
     currency: "USD",
     gasPrice: 21,
-    token: matic,
+    enabled: true,
+    token: 'ETH',
+    gasPriceAPI: "https://api.etherscan.io/api?module=proxy&action=eth_gasPrice",
+    showTimeSpent: true,
     coinmarketcap: process.env.COINMARKETCAP_API_KEY
-  },
-  etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
-  },
+  }
 };
