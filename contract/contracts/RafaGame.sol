@@ -109,9 +109,11 @@ contract NFTGame is ERC721 {
         override
         returns (string memory)
     {
+        /// @dev Return NFT data consulting _tokenID
         CharacterAttributes memory charAttributes = nftHolderAttributes[
             _tokenId
         ];
+        /// @dev Convert uint256 to strings
         string memory strHp = Strings.toString(charAttributes.hp);
         string memory strMaxHp = Strings.toString(charAttributes.maxHp);
         string memory strAttackDamage = Strings.toString(
@@ -135,9 +137,10 @@ contract NFTGame is ERC721 {
                 "} ]}"
             )
         );
-
+        /// @notice Convert JSON and encode in Base64
+        /// @dev Tell to the navigator: "Hey, I'm passing you a Base64 encoded JSON file, please render it properly"
         string memory output = string(
-            abi.encodePacked("data:application/json;base64,", json);
+            abi.encodePacked("data:application/json;base64,", json)
         );
 
         return output;

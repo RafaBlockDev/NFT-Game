@@ -8,15 +8,17 @@ require("solidity-coverage");
 module.exports = {
   solidity: "0.8.4",
   networks: {
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
+    mumbai: {
+      url: process.env.ALCHEMY_MUMBAI_URL,
       accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+        process.env.PRIVATE_KEY_MUMBAI,
     },
   },
   gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
     currency: "USD",
+    gasPrice: 21,
+    token: matic,
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
