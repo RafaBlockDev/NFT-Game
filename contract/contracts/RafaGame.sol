@@ -9,6 +9,8 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
+import "./libraries/Base64.sol";
+
 import "hardhat/console.sol";
 
 /// @dev The contract inherits from ERC721, which is the standard NFT contractss
@@ -45,9 +47,7 @@ contract NFTGame is ERC721 {
         string[] memory characterImageURIs,
         uint256[] memory characterHp,
         uint256[] memory characterAttackDmg
-    )
-    ERC721("HEROES", "HERO")
-    {
+    ) ERC721("HEROES", "HERO") {
         for (uint256 i = 0; i < characterNames.length; i += 1) {
             defaultCharacters.push(
                 CharacterAttributes({
@@ -90,12 +90,59 @@ contract NFTGame is ERC721 {
             attackDamage: defaultCharacters[_characterIndex].attackDamage
         });
 
-        console.log("Minted NFT w/ tokenId %s and characterIndex %s ", newItemId, _characterIndex);
+        console.log(
+            "Minted NFT w/ tokenId %s and characterIndex %s ",
+            newItemId,
+            _characterIndex
+        );
 
         // Keep an easy way to see who owns what NFT
         nftHolders[msg.sender] = newItemId;
 
         // Increment the tokenIf for the next person that uses it.
         _tokenIds.increment();
+    }
+
+    function tokenURI(uint256 _tokenId)
+        public
+        view
+        override
+        returns (string memory)
+    {
+        /// @dev Return NFT data consulting _tokenID
+        CharacterAttributes memory charAttributes = nftHolderAttributes[
+            _tokenId
+        ];
+        /// @dev Convert uint256 to strings
+        string memory strHp = Strings.toString(charAttributes.hp);
+        string memory strMaxHp = Strings.toString(charAttributes.maxHp);
+        string memory strAttackDamage = Strings.toString(
+            charAttributes.attackDamage
+        );
+
+        string memory json = Base64.encode(
+            abi.encodePacked(
+                '{"name": "',
+                charAttributes.name,
+                " -- NFT #: ",
+                Strings.toString(_tokenId),
+                '", "description": "This is an NFT that lets people play in the game Metaverse Slayer!", "image": "',
+                charAttributes.imageURI,
+                '", "attributes": [ { "trait_type": "Health Points", "value": ',
+                strHp,
+                ', "max_value":',
+                strMaxHp,
+                '}, { "trait_type": "Attack Damage", "value": ',
+                strAttackDamage,
+                "} ]}"
+            )
+        );
+        /// @notice Convert JSON and encode in Base64
+        /// @dev Tell to the navigator: "Hey, I'm passing you a Base64 encoded JSON file, please render it properly"
+        string memory output = string(
+            abi.encodePacked("data:application/json;base64,", json)
+        );
+
+        return output;
     }
 }
