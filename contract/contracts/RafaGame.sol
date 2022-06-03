@@ -144,7 +144,7 @@ contract NFTGame is ERC721 {
         // Increment the tokenIf for the next person that uses it.
         _tokenIds.increment();
 
-        emit CharacterNFTMinted(msg.sender, newItemId, characterIndex);
+        emit CharacterNFTMinted(msg.sender, newItemId, _characterIndex);
     }
 
     function tokenURI(uint256 _tokenId)
