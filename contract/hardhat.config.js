@@ -14,7 +14,14 @@ module.exports = {
         [process.env.PRIVATE_KEY_MUMBAI]
     },
   },
+  settings: {
+    optimizer: {
+      enabled: true,
+      runs: 500
+    }
+  },
   gasReporter: {
+    srcPath: "./contracts",
     currency: "USD",
     gasPrice: 21,
     enabled: true,

@@ -6,17 +6,26 @@ const main = async () => {
         "https://i.imgur.com/xVu4vFL.png", 
         "https://i.imgur.com/WMB6g9u.png"],
         [100, 200, 300], // HP Values
-        [100, 50, 25]   // Attack damage values
+        [100, 50, 25],   // Attack damage values
+        "Elon Musk", // Big Boss
+        "https://i.imgur.com/AksR0tt.png",
+        10000,
+        50
     );
     await gameContract.deployed();
     console.log("📝 Contract deployed to: ", gameContract.address);
 
     let txn;
-    txn = await gameContract.mintCharacterNFT(2);
+    txn = await gameContract.mintCharacterNFT(1);
+    await txn.wait();
+    
+    txn = await gameContract.attackBoss();
     await txn.wait();
 
-    let returnedTokenUri = await gameContract.tokenURI(1);
-    console.log("Token URI: ", returnedTokenUri);
+    txn = await gameContract.attackBoss();
+    await txn.wait();
+
+    console.log("Done!");
         
 }
 
