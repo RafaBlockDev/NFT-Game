@@ -226,6 +226,13 @@ contract NFTGame is ERC721 {
             CharacterAttributes memory emptyStruct;
             return emptyStruct;
         }
-        // Else, return an empty character.
+    }
+
+    function getAllDefaultCharacters()
+        public
+        view
+        returns (CharacterAttributes[] memory)
+    {
+        return defaultCharacters;
     }
 }
