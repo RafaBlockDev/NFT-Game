@@ -175,4 +175,27 @@ contract NFTGame is ERC721 {
 
         return output;
     }
+
+    function attackBoss() public {
+        // Get the state of the player's NFT.
+        uint256 nftTokenIdOfPlayer = nftHolders[msg.sender];
+        // Make sure the player has more than 0 HP.
+        CharacterAttributes storage player = nftHolderAttributes[
+            nftTokenIdOfPlayer
+        ];
+        // Make sure the boss has more than 0 HP.
+        console.log(
+            "\nPlayer w/ character %s about to attack. Has %s HP and %s AD",
+            player.name,
+            player.hp,
+            player.attackDamage
+        );
+        // Allow player to attack boss.
+        console.log(
+            "Boss %s has %s HP and %s AD",
+            bigBoss.name,
+            bigBoss.hp,
+            bigBoss.attackDamage
+        );
+    }
 }
