@@ -16,7 +16,7 @@ const main = async () => {
     console.log("📝 Contract deployed to: ", gameContract.address);
 
     let txn;
-    txn = await gameContract.mintCharacterNFT(2);
+    txn = await gameContract.mintCharacterNFT(1);
     await txn.wait();
     
     txn = await gameContract.attackBoss();
