@@ -1,46 +1,42 @@
 const main = async () => {
-    const gameContractFactory = await hre.ethers.getContractFactory('NFTGame');
-    const gameContract = await gameContractFactory.deploy(                     
-      ["Rafa", "Joshua", "AMLO"],       
-      ["https://i.imgur.com/pKd5Sdk.png", 
+  const gameContractFactory = await hre.ethers.getContractFactory("NFTGame");
+  const gameContract = await gameContractFactory.deploy(
+      ["Rafa", "Joshua", "Val"], // Names
+      ["https://i.imgur.com/pKd5Sdk.png", // Images
       "https://i.imgur.com/xVu4vFL.png", 
-      "https://i.imgur.com/u7T87A6.png"],
-      [100, 200, 300],                    
-      [100, 50, 25]                       
-    );
-    await gameContract.deployed();
-    console.log("📝 Contract deployed to:", gameContract.address);
+      "https://i.imgur.com/WMB6g9u.png"],
+      [100, 200, 300], // HP Values
+      [100, 50, 25],   // Attack damage values
+      "Elon Musk", // Big Boss
+      "https://i.imgur.com/AksR0tt.png",
+      10000,
+      50
+  );
+  await gameContract.deployed();
+  console.log("📝 Contract deployed to: ", gameContract.address);
+
+  let txn;
+  txn = await gameContract.mintCharacterNFT(2);
+  await txn.wait();
   
-    
-    let txn;
-    txn = await gameContract.mintCharacterNFT(0);
-    await txn.wait();
-    console.log("Minted NFT #1");
-  
-    txn = await gameContract.mintCharacterNFT(1);
-    await txn.wait();
-    console.log("Minted NFT #2");
-  
-    txn = await gameContract.mintCharacterNFT(2);
-    await txn.wait();
-    console.log("Minted NFT #3");
-  
-    txn = await gameContract.mintCharacterNFT(1);
-    await txn.wait();
-    console.log("Minted NFT #4");
-  
-    console.log("🎉 Done deploying and minting!");
-  
-  };
-  
-  const runMain = async () => {
-    try {
+  txn = await gameContract.attackBoss();
+  await txn.wait();
+
+  txn = await gameContract.attackBoss();
+  await txn.wait();
+
+  console.log("Done!");
+      
+}
+
+const runMain = async () => {
+  try {
       await main();
       process.exit(0);
-    } catch (error) {
+  } catch (error) {
       console.log(error);
       process.exit(1);
-    }
-  };
-  
-  runMain();
+  }
+};
+
+runMain();
