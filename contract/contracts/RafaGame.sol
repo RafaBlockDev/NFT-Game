@@ -197,5 +197,9 @@ contract NFTGame is ERC721 {
             bigBoss.hp,
             bigBoss.attackDamage
         );
+
+        require(player.hp > 0, "Error: Character must have HP to attack boss.");
+
+        require(bigBoss.hp > 0, "Error: boss must have HP to attack boss.");
     }
 }
