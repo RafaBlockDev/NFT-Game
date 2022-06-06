@@ -21,7 +21,6 @@
   margin: 0;
   font-size: 50px;
   font-weight: bold;
-  background: linear-gradient(to right, purple, orange, pink, yellow);
   color: white;
 }
 
@@ -45,6 +44,10 @@
   font-size: 16px;
   font-weight: bold;
   color: white;
+}
+
+.image {
+  border-radius: 1rem;
 }
 
 .connect_wallet-container {
