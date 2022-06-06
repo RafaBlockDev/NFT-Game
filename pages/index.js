@@ -16,7 +16,7 @@ export default function Home() {
       } else {
         console.log("We got the Ethereum object!!!! 🥳", ethereum);
 
-        const accounts = await ethereum.request({ method: "eth_account"});
+        const accounts = await ethereum.request({ method: "eth_accounts"});
 
         if(accounts.length !== 0) {
           const account = accounts[0];
@@ -42,7 +42,7 @@ export default function Home() {
     }
 
     const accounts = await ethereum.request({
-      method: "eth_accounts",
+      method: "eth_requestAccounts",
     });
 
     console.log("Connected", accounts[0]);
@@ -68,7 +68,7 @@ export default function Home() {
               src="https://media2.giphy.com/media/13INltuXmMfBRe/giphy.gif?cid=ecf05e47q4bukz0r4ggm9qzvhc3h5qa376bn87zueusjsglw&rid=giphy.gif&ct=g"
               alt="Hacker gif"
             />
-            <button className={styles.cta_button}>
+            <button className={styles.cta_button} onClick={connectWalletAction}>
               Connect Wallet</button>
           </div>
         </div>
