@@ -1,6 +1,23 @@
+import React, { useEffect } from "react";
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+
+  const checkIfWalletIsConnected = () => {
+    const { ethereum } = window;
+
+    if(!ethereum) {
+      alert("Make sure you have Metamask 🦊")
+      return;
+    } else {
+      alert("We got it!!!! 🥳", ethereum);
+    }
+  };
+
+  useEffect(() => {
+    checkIfWalletIsConnected();
+  },[]);
+
   return (
     <div className={styles.App}>
       <div className={styles.container}>
