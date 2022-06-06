@@ -6,7 +6,7 @@ export default function Home() {
   const [currentAccount, setCurrentAccount] = useState(null);
 
   // Check if there are a ethereum object in the window
-  const checkIfWalletIsConnected = () => {
+  const checkIfWalletIsConnected = async () => {
     try {
       const { ethereum } = window;
 
@@ -16,6 +16,8 @@ export default function Home() {
       } else {
         console.log("We got the Ethereum object!!!! 🥳", ethereum);
 
+        const accounts = await ethereum.request({ method: "eth_account"});
+
         if(accounts.length !== 0) {
           const account = accounts[0];
           console.log("Found an anthourized account: ", account);
@@ -24,11 +26,31 @@ export default function Home() {
           console.log("No anthourized account found");
         }
       }
-  }
+    }
     catch (error) {
       console.log(error);
     }
   };
+
+  const connectWalletAction = async () => {
+    try {
+      const { ethereum } = window;
+
+    if (!ethereum) {
+    alert ("Get Metamask 🦊")
+    return;
+    }
+
+    const accounts = await ethereum.request({
+      method: "eth_accounts",
+    });
+
+    console.log("Connected", accounts[0]);
+    setCurrentAccount(accounts[0]);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
   useEffect(() => {
     checkIfWalletIsConnected();
@@ -46,6 +68,8 @@ export default function Home() {
               src="https://media2.giphy.com/media/13INltuXmMfBRe/giphy.gif?cid=ecf05e47q4bukz0r4ggm9qzvhc3h5qa376bn87zueusjsglw&rid=giphy.gif&ct=g"
               alt="Hacker gif"
             />
+            <button className={styles.cta_button}>
+              Connect Wallet</button>
           </div>
         </div>
         <div className={styles.footer_container}>
