@@ -1,5 +1,4 @@
 import styles from '../styles/Home.module.css'
-import twitterLogo from "../images/twitter-logo.svg";
 
 export default function Home() {
   return (
@@ -16,13 +15,12 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.footer_container}>
-          <img alt="Twitter Logo" className={styles.twitter_logo} src={twitterLogo} />
           <a
             className={styles.footer_text}
             href=""
             target="_blank"
             rel="noreferrer"
-          >{`built with @rafaelfuentes.eth`}</a>
+          >{`🦄 Built by @rafaelfuentes.eth`}</a>
         </div>
       </div>
     </div>
