@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from '../styles/Home.module.css'
+import SelectCharacter from "../components/SelectCharacter/index";
 
 export default function Home() {
 
@@ -31,6 +32,23 @@ export default function Home() {
       console.log(error);
     }
   };
+
+  const renderContent = () => {
+    if (!currentAccount) {
+      return (
+        <div className={styles.connect_wallet_container}>
+          <img src="https://64.media.tumblr.com/tumblr_mbia5vdmRd1r1mkubo1_500.gifv"
+          alt="Monty Python Gif"
+          />
+          <button className={styles.cta_button} onClick={connectWalletAction}>
+            ConnectWallet
+          </button>
+        </div>
+      );
+    } else if (currentAccount && !characterNFT) {
+      return <SelectCharacter setCharacterNFT={setCharacterNFT} />;
+    }
+  }
 
   const connectWalletAction = async () => {
     try {
